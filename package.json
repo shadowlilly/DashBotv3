@@ -8,6 +8,6 @@
     "start": "node bot.js"
   },
   "dependencies": {
-    "discordjs": "file:modules/discord.js"
+    "discordjs": "file:node_modules/discord.js"
   }
 }
