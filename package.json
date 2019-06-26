@@ -1,0 +1,13 @@
+{
+  "name": "DashBot",
+  "version": "3.0.0",
+  "description": "Just a bot",
+  "main": "bot.js",
+  "author": "Lilly",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discordjs": "file:modules/discord.js"
+  }
+}
