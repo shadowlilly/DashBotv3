@@ -6,8 +6,5 @@
   "author": "Lilly",
   "scripts": {
     "start": "node bot.js"
-  },
-  "dependencies": {
-    "discordjs": "file:node_modules/discord.js"
   }
 }
