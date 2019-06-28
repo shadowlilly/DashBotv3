@@ -7,7 +7,6 @@ var request = new XMLHTTPRequest();
 request.addEventListener("readystatechange", function() {
     if(request.readyState == request.DONE) {
         token += request.responseText;
-        console.log(token);
         Client.login(token).then(function() {
             token = "FECK OFF";
             request = null;
