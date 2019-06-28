@@ -8,7 +8,7 @@ request.addEventListener("readystatechange", function() {
     if(request.readyState == request.DONE) {
         token += request.responseText;
         Client.login(token).then(function() {
-            token = “FECK OFF”;
+            token = "FECK OFF";
             request = null;
         });
     }
