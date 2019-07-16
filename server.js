@@ -31,4 +31,4 @@ client.on('connect', function(connection) {
   });
 });
 
-client.connect("wss://gateway.discord.gg", 'echo-protocol');
+client.connect("wss://gateway.discord.gg", 'Sec-WebSocket-Protocol');
