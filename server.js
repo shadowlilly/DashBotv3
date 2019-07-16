@@ -4,7 +4,7 @@ const path = require('path');
 
 http.createServer(function (request, response) {
 
-  if(response.url.endsWith("connect.php")) {
+  if(request.url.endsWith("connect.php")) {
     response.writeHead(200, { 'Content-Type': 'text/html'});
     var html =
       "<!DOCTYPE HTML>"
