@@ -5,7 +5,8 @@
   "main": "bot.js",
   "author": "Lilly",
   "scripts": {
-    "start": "node bot.js"
+    "startworker": "node bot.js",
+    "startweb": "node server.js"
   },
   "dependencies": {
 	"discord.js": "11.5.1",
