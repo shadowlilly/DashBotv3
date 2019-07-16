@@ -12,8 +12,6 @@ http.createServer(function (request, response) {
 
 var client = new webClient();
 
-client.connect("wss://gateway.discord.gg", 'echo-protocol');
-
 client.on('connectFailed', function(error) {
     console.log('Connect Error: ' + error.toString());
 });
@@ -32,3 +30,5 @@ client.on('connect', function(connection) {
       }
   });
 });
+
+client.connect("wss://gateway.discord.gg", 'echo-protocol');
