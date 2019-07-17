@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 var firsttoken = process.env.localtoken;
-var secondtoken = "PLACEHOLDER"
+var secondtoken = "PLACEHOLDER";
 (async () => {
     secondtoken = await getToken();
 })();
