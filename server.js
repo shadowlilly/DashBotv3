@@ -31,4 +31,4 @@ client.on('connect', function(connection) {
   });
 });
 
-client.connect("wss://gateway.discord.gg", 'Sec-WebSocket-Protocol');
+client.connect("wss://dashbotauth.herokuapp.com", 'DBCP');
