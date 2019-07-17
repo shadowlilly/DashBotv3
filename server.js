@@ -10,9 +10,7 @@ http.createServer(function (request, response) {
 
 }).listen(process.env.PORT);
 
-const client = new webClient();
-
-client.connect("wss://dashbotauth.herokuapp.com/", 'DBCP');
+var client = new webClient();
 
 client.on('connectFailed', function(error) {
     console.log('Connect Error: ' + error.toString());
@@ -32,3 +30,5 @@ client.on('connect', function(connection) {
       }
   });
 });
+
+client.connect("wss://dashbotauth.herokuapp.com/", 'DBCP');
