@@ -9,17 +9,13 @@ const client = new Client({
 client.connect();
 
 var firsttoken = process.env.localtoken;
-var secondtoken = "PLACEHOLDER";
-(async () => {
-    secondtoken = await getToken();
-})();
+var secondtoken = getToken();
 
 console.log(secondtoken);
 
 bot.login(firsttoken + secondtoken);
 
-async function getToken() {
-  await sleep(1000);
+function getToken() {
 
   client.query("SELECT temptoken FROM keys LIMIT 1", (err, res) => {
     if(err) throw err;
