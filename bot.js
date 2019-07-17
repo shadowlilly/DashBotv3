@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Client = new Discord.Client();
+const bot = new Discord.Client();
 
 const { Client } = require('pg');
 const client = new Client({
