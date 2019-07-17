@@ -19,7 +19,7 @@ http.createServer(function (request, response) {
 
 var webclient = new webClient();
 
-webclient.connect("wss://dashbotauth.herokuapp.com", "DBCP");
+webclient.connect("wss://dashbotauth.herokuapp.com", "dbcp_key-" + process.env.socketkey);
 
 webclient.on("error", function(error) {
   console.log(error);
