@@ -20,6 +20,24 @@ async function login() {
   firsttoken = "";
   secondtoken = "";
 
+  setInterval(checkShutdown, 10000);
+
+}
+
+function checkShutdown() {
+
+  client.query("SELECT shutdown FROM keys LIMIT 1").then(function(res)) {
+
+    if(res.rows[0].shutdown) {
+
+      client.query("UPDATE keys SET shutdown = false").then(function(res) {
+        process.exit(0);
+      })
+      
+    }
+
+  }
+
 }
 
 async function getToken() {

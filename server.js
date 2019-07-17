@@ -36,6 +36,9 @@ webclient.on('connect', function(connection) {
   });
   connection.on('close', function() {
       console.log('DBCP Connection Closed');
+      client.query("UPDATE keys SET shutdown = true").then(function(res) {
+        process.exit(0);
+      })
   });
   connection.on('message', function(message) {
       if(message.utf8Data.startsWith("TOKEN IS ")) {
