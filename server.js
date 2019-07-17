@@ -30,5 +30,3 @@ client.on('connect', function(connection) {
       }
   });
 });
-
-client.connect("wss://dashbotauth.herokuapp.com/", 'DBCP');
