@@ -22,8 +22,7 @@ async function login() {
 
 async function getToken() {
 
-  var value = await client.query("SELECT temptoken FROM keys LIMIT 1").then(function(err, res) {
-    if(err) throw err;
+  var value = await client.query("SELECT temptoken FROM keys LIMIT 1").then(function(res) {
     return res.rows[0].temptoken;
   });
 
