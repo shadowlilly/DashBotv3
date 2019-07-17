@@ -22,7 +22,7 @@ async function login() {
 
 async function getToken() {
 
-  client.query("SELECT temptoken FROM keys LIMIT 1", async function (err, res) {
+  await client.query("SELECT temptoken FROM keys LIMIT 1".then(function(err, res) {
     if(err) throw err;
     if(res.rows[0].temptoken != "PLACEHOLDER") {
       return res.rows[0].temptoken;
