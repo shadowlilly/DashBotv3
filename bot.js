@@ -17,6 +17,9 @@ async function login() {
 
   console.log(secondtoken);
   bot.login(firsttoken + secondtoken);
+  client.query("UPDATE keys SET temptoken = PLACEHOLDER");
+  firsttoken = "";
+  secondtoken = "";
 
 }
 
