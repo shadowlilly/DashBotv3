@@ -39,4 +39,4 @@ webclient.on('connect', function(connection) {
   });
 });
 
-webclient.connect("wss://dashbotauth.herokuapp.com/server.js", 'DBCP-KEY_' + process.env.socketkey);
+webclient.connect("wss://dashbotauth.herokuapp.com/server.js", 'DBCP');
