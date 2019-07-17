@@ -8,23 +8,25 @@ const client = new Client({
 });
 client.connect();
 
-var firsttoken = process.env.localtoken;
-var secondtoken = getToken();
+login();
 
-console.log(secondtoken);
+async function login() {
 
-bot.login(firsttoken + secondtoken);
+  var firsttoken = process.env.localtoken;
+  var secondtoken = await getToken();
+  bot.login(firsttoken + secondtoken);
 
-function getToken() {
+}
+
+async function getToken() {
 
   client.query("SELECT temptoken FROM keys LIMIT 1", (err, res) => {
     if(err) throw err;
-    console.log(res.rows[0].temptoken);
     if(res.rows[0].temptoken != "PLACEHOLDER") {
       return res.rows[0].temptoken;
     }
     else {
-      return getToken();
+      return await getToken();
     }
   });
 
