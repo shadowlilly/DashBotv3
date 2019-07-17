@@ -29,11 +29,11 @@ webclient.on('connect', function(connection) {
       console.log("Connection Error: " + error.toString());
   });
   connection.on('close', function() {
-      console.log('echo-protocol Connection Closed');
+      console.log('DBCP Connection Closed');
   });
   connection.on('message', function(message) {
       if(message.utf8Data.startsWith("TOKEN IS ")) {
-        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9));
+        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9, function(err, res){}));
       }
   });
 });
