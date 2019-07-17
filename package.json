@@ -11,6 +11,7 @@
   "dependencies": {
 	   "discord.js": "11.5.1",
      "websocket": "1.0.29",
-     "pg": "7.11.0"
+     "pg": "7.11.0",
+     "request": "2.88.0"
   }
 }

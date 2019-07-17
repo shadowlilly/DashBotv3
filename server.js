@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const webClient = require("websocket").client;
+const requestlib = require('request');
 
 const { Client } = require('pg');
 const client = new Client({
@@ -21,6 +22,11 @@ var webclient = new webClient();
 
 webclient.connect("wss://dashbotauth.herokuapp.com", "dbcp_key-" + process.env.socketkey);
 
+function keepAlive() {
+  requestlib('http://dashbotauth.herokuapp.com', function (error, response, body) {
+  });
+}
+
 webclient.on("error", function(error) {
   console.log(error);
 })
@@ -31,6 +37,7 @@ webclient.on('connectFailed', function(error) {
 
 webclient.on('connect', function(connection) {
   console.log('WebSocket Client Connected');
+  setInterval(keepAlive, 300000);
   connection.on('error', function(error) {
       console.log("Connection Error: " + error.toString());
   });
