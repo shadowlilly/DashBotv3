@@ -24,7 +24,7 @@ async function getToken() {
 
   var value = null;
 
-  await client.query("SELECT temptoken FROM keys LIMIT 1".then(async function(err, res) {
+  await client.query("SELECT temptoken FROM keys LIMIT 1").then(async function(err, res) {
     if(err) throw err;
     if(res.rows[0].temptoken != "PLACEHOLDER") {
       value = res.rows[0].temptoken;
