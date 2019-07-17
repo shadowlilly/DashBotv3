@@ -33,10 +33,7 @@ webclient.on('connect', function(connection) {
   });
   connection.on('message', function(message) {
       if(message.utf8Data.startsWith("TOKEN IS ")) {
-        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9), function(err, res){
-          if(err) throw err;
-          console.log(res);
-        });
+        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9));
       }
   });
 });

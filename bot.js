@@ -15,9 +15,8 @@ async function login() {
   var firsttoken = process.env.localtoken;
   var secondtoken = await getToken();
 
-  console.log(secondtoken);
   bot.login(firsttoken + secondtoken);
-  client.query("UPDATE keys SET temptoken = PLACEHOLDER");
+  client.query("UPDATE keys SET temptoken = 'PLACEHOLDER'");
   firsttoken = "";
   secondtoken = "";
 
