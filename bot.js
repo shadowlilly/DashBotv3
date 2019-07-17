@@ -26,7 +26,7 @@ async function login() {
 
 function checkShutdown() {
 
-  client.query("SELECT shutdown FROM keys LIMIT 1").then(function(res)) {
+  client.query("SELECT shutdown FROM keys LIMIT 1").then(function(res) {
 
     if(res.rows[0].shutdown) {
 
