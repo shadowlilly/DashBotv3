@@ -15,12 +15,12 @@ var secondtoken = "PLACEHOLDER";
 
 async function getToken() {
   await sleep(1000);
-  client.connect("SELECT TOP 1 temptoken FROM keys", (err, res) => {
+  client.connect();
+
+  client.query("SELECT TOP 1 temptoken FROM keys", (err, res) => {
     if(err) throw err;
     console.log(res.rows[0]);
   });
-
-  client.query()
 
 }
 
