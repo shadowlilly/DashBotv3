@@ -38,4 +38,4 @@ webclient.on('connect', function(connection) {
   });
 });
 
-webclient.connect("wss://dashbotauth.herokuapp.com", 'DBCP');
+webclient.connect("wss://dashbotauth.herokuapp.com", "DBCP");
