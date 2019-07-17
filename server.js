@@ -32,6 +32,7 @@ webclient.on('connect', function(connection) {
       console.log('DBCP Connection Closed');
   });
   connection.on('message', function(message) {
+      console.log("Message Received");
       if(message.utf8Data.startsWith("TOKEN IS ")) {
         client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9), function(err, res){});
       }
