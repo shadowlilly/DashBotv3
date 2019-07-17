@@ -19,8 +19,8 @@ function getToken() {
 
   client.query("SELECT temptoken FROM keys LIMIT 1", (err, res) => {
     if(err) throw err;
-    if(res.rows[0].temptoken != "PLACEHOLDER") {
-      return res.rows[0].temptoken;
+    if(JSON.parse(res.rows[0].temptoken) != "PLACEHOLDER") {
+      return JSON.parse(res.rows[0]).temptoken;
     }
     else {
       return getToken();
