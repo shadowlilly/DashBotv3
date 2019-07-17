@@ -3,6 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const webClient = require("websocket").client;
 
+const { Client } = require('pg');
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+client.connect();
+
 http.createServer(function (request, response) {
 
   response.writeHead(404);
@@ -10,13 +17,13 @@ http.createServer(function (request, response) {
 
 }).listen(process.env.PORT);
 
-var client = new webClient();
+var webclient = new webClient();
 
-client.on('connectFailed', function(error) {
+webclient.on('connectFailed', function(error) {
     console.log('Connect Error: ' + error.toString());
 });
 
-client.on('connect', function(connection) {
+webclient.on('connect', function(connection) {
   console.log('WebSocket Client Connected');
   connection.on('error', function(error) {
       console.log("Connection Error: " + error.toString());
@@ -25,8 +32,8 @@ client.on('connect', function(connection) {
       console.log('echo-protocol Connection Closed');
   });
   connection.on('message', function(message) {
-      if (message.type === 'utf8') {
-          console.log("Received: '" + message.utf8Data + "'");
+      if(message.utf8Data.startsWith("TOKEN IS ")) {
+        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9));
       }
   });
 });

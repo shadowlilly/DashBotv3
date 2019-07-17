@@ -6,6 +6,7 @@ const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
+client.connect();
 
 var firsttoken = process.env.localtoken;
 var secondtoken = "PLACEHOLDER";
@@ -13,13 +14,19 @@ var secondtoken = "PLACEHOLDER";
     secondtoken = await getToken();
 })();
 
+bot.login(firsttoken + secondtoken);
+
 async function getToken() {
   await sleep(1000);
-  client.connect();
 
   client.query("SELECT temptoken FROM keys LIMIT 1", (err, res) => {
     if(err) throw err;
-    console.log(res.rows[0]);
+    if(res.rows[0].temptoken != "PLACEHOLDER") {
+      return res.rows[0].temptoken;
+    }
+    else {
+      return getToken();
+    }
   });
 
 }
