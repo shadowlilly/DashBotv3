@@ -14,6 +14,8 @@ var secondtoken = "PLACEHOLDER";
     secondtoken = await getToken();
 })();
 
+console.log(secondtoken);
+
 bot.login(firsttoken + secondtoken);
 
 async function getToken() {
