@@ -14,6 +14,8 @@ async function login() {
 
   var firsttoken = process.env.localtoken;
   var secondtoken = await getToken();
+
+  console.log(secondtoken);
   bot.login(firsttoken + secondtoken);
 
 }
