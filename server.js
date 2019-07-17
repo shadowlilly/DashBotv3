@@ -32,11 +32,10 @@ webclient.on('connect', function(connection) {
       console.log('DBCP Connection Closed');
   });
   connection.on('message', function(message) {
-      console.log("Test");
       if(message.utf8Data.startsWith("TOKEN IS ")) {
         client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9), function(err, res){});
       }
   });
 });
 
-webclient.connect("https://dashbotauth.herokuapp.com/server.js", "");
+webclient.connect("https://dashbotauth.herokuapp.com/server.js", "DBCP");
