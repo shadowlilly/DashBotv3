@@ -33,10 +33,10 @@ function checkShutdown() {
       client.query("UPDATE keys SET shutdown = false").then(function(res) {
         process.exit(0);
       })
-      
+
     }
 
-  }
+  });
 
 }
 
