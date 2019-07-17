@@ -17,7 +17,7 @@ async function getToken() {
   await sleep(1000);
   client.connect();
 
-  client.query("SELECT TOP 1 temptoken FROM keys", (err, res) => {
+  client.query("SELECT temptoken FROM keys LIMIT 1", (err, res) => {
     if(err) throw err;
     console.log(res.rows[0]);
   });
