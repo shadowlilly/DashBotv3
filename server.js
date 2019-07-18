@@ -44,7 +44,7 @@ webclient.on('connect', function(connection) {
   setInterval(keepAlive, 300000);
 
   connection.on('error', function(err) {
-      console.log("Connection Error: " + err;
+      console.log("Connection Error: " + err);
   });
 
   connection.on('close', function() {
