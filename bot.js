@@ -102,11 +102,19 @@ function sleep(ms){
     })
 }
 
-function botReady() {
+async function botReady() {
 
   console.log("Bot is ready. Setting default presence");
 
   setBotPresence("default");
+
+  await sleep(5000);
+
+  setBotPresence("devmode");
+
+  await sleep(5000);
+
+  setBotPresence("Intentionally Invalid Name");
 
 }
 
