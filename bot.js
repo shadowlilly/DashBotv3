@@ -10,6 +10,8 @@ launchBot();
 
 globals.bot.on("ready", botReady)
 
+globals.bot.on("message", receivedMessage);
+
 async function launchBot() {
 
   await database.connect().then(function() {
@@ -107,6 +109,12 @@ async function botReady() {
   console.log("Bot is ready. Setting default presence");
 
   setBotPresence("default");
+
+}
+
+function receievedMessage(message) {
+
+  var intent = globals.parseMessage(message);
 
 }
 

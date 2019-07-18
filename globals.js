@@ -6,6 +6,7 @@ const Discord = require("discord.js");
 const WebSocketClient = require("websocket").client;
 const bot = new Discord.Client();
 const parseXML = require('xml2js').parseString;
+const parseMessage = require("./parseMessage.js");
 
 module.exports = {
 
@@ -16,6 +17,7 @@ module.exports = {
   Discord: Discord,
   WebSocketClient: WebSocketClient,
   bot: bot,
-  parseXML: parseXML
+  parseXML: parseXML,
+  parseMessage: parseMessage
 
 }
