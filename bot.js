@@ -123,6 +123,8 @@ function setBotPresence(presenceName) {
         }
         else {
           var selectedPresence = data.presences[presenceName];
+          console.log(selectedPresence);
+          /*
           if(selectedPresence == null) {
             console.log("Presence " + presenceName + " could not be found. Switching to default");
           }
@@ -145,6 +147,7 @@ function setBotPresence(presenceName) {
               console.log("An error occured while setting presence. " + err);
             });
           }
+          */
         }
       })
     }
