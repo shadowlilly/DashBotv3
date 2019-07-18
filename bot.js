@@ -131,7 +131,7 @@ function setBotPresence(presenceName) {
               return;
             }
           }
-          bot.user.setPresence({game: {name: selectedPresence["text"][0] }, status: presenceName["status"][0]}).then(function() {
+          globals.bot.user.setPresence({game: {name: selectedPresence["text"][0] }, status: presenceName["status"][0]}).then(function() {
             console.log("Presence set to " + presenceName);
           }).catch(function(err) {
             console.log("An error occured while setting presence. " + err);
