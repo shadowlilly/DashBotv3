@@ -112,7 +112,7 @@ async function botReady() {
 
 }
 
-function receievedMessage(message) {
+function receivedMessage(message) {
 
   var intent = globals.parseMessage(message);
 
