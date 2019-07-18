@@ -123,33 +123,23 @@ function setBotPresence(presenceName) {
         }
         else {
           var selectedPresence = data.presences[presenceName][0];
-          console.log(selectedPresence);
-          /*
           if(selectedPresence == null) {
             console.log("Presence " + presenceName + " could not be found. Switching to default");
+            selectedPresence = data.presences["default"][0];
+            if(selectedPresence == null) {
+              console.log("Default presence could not be found. Presence not set");
+              return;
+            }
           }
-          else {
-            bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
-              console.log("Presence set to " + presenceName);
-            }).catch(function(err) {
-              console.log("An error occured while setting presence. " + err);
-            });
-            return;
-          }
-          selectedPresence = data.presences["default"];
-          if(selectedPresence == null) {
-            console.log("Default presence could not be found. Presence not set");
-          }
-          else {
-            bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
-              console.log("Presence set to " + presenceName);
-            }).catch(function(err) {
-              console.log("An error occured while setting presence. " + err);
-            });
-          }
-          */
+
+          bot.user.setPresence({ game: { selectedPresence.text }, status: presenceName.status).then(function() {
+            console.log("Presence set to " + presenceName);
+          }).catch(function(err) {
+            console.log("An error occured while setting presence. " + err);
+          });
+
         }
-      })
+      });
     }
   })
 
