@@ -106,7 +106,7 @@ function botReady() {
 
   console.log("Bot is ready. Setting default presence");
 
-  setBotPresence(default);
+  setBotPresence("default");
 
 }
 
