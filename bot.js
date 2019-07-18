@@ -68,9 +68,9 @@ function checkShutdown() {
         process.exit(1);
       });
     }
-  }).catch(function(err)) {
+  }).catch(function(err) {
     console.log("An error occured while detecting if a shutdown is neccessary. " + err);
-  }
+  });
 
 }
 
