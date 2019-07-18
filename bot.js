@@ -108,14 +108,6 @@ async function botReady() {
 
   setBotPresence("default");
 
-  await sleep(5000);
-
-  setBotPresence("devmode");
-
-  await sleep(5000);
-
-  setBotPresence("Intentionally Invalid Name");
-
 }
 
 function setBotPresence(presenceName) {
@@ -133,6 +125,7 @@ function setBotPresence(presenceName) {
           var selectedPresence = data.presences[presenceName];
           if(selectedPresence == null) {
             console.log("Presence " + presenceName + " could not be found. Switching to default");
+            presenceName = "default";
             selectedPresence = data.presences["default"];
             if(selectedPresence == null) {
               console.log("Default presence could not be found. Presence not set");
