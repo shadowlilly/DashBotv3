@@ -117,9 +117,9 @@ function setBotPresence(presenceName) {
       console.log("An error occured while reading the presence file. " + err);
     }
     else {
-      var selectedPresence = result.presences[presenceName];
-      console.log(selectedPresence);
+      console.log(result);
       /*
+      var selectedPresence = result.presences[presenceName];
       if(selectedPresence == null) {
         console.log("Presence " + presenceName + " could not be found. Switching to default");
       }
