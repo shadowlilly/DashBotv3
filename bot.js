@@ -122,7 +122,7 @@ function setBotPresence(presenceName) {
           console.log("An error occured while processing the presence file. " + err);
         }
         else {
-          var selectedPresence = data.presences[presenceName];
+          var selectedPresence = data.presences[presenceName][0];
           console.log(selectedPresence);
           /*
           if(selectedPresence == null) {
