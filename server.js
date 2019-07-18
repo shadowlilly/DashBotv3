@@ -1,55 +1,95 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const webClient = require("websocket").client;
-const requestlib = require('request');
+const globals = require("./globals.js");
 
-const { Client } = require('pg');
-const client = new Client({
+const pg = require('pg').Client;
+const database = new pg({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
-client.connect();
 
-http.createServer(function (request, response) {
+launchServer();
+
+async function launchServer() {
+
+  await database.connect().then(function() {
+    console.log("Database connected");
+  }).catch(function(err) {
+    console.log("An error occured while connecting to database. " + err);
+    console.log("The process cannot safely continue. Exiting...");
+    process.exit(1);
+  });
+
+  const server = globals.http.createServer(respond404).listen(process.env.PORT);
+
+  console.log("Now listening for HTTP requests");
+
+  const socket = new globals.WebSocketClient();
+
+  console.log("Now attempting to establish a WebSocket connection");
+
+  webclient.connect("wss://dashbotauth.herokuapp.com", "dbcp_key-" + process.env.socketkey);
+
+}
+
+webclient.on("error", function(err) {
+  console.log("An error occured with the websocket. " + err);
+})
+
+webclient.on('connectFailed', function(err) {
+    console.log("Connection to the websocket failed. " + err);
+});
+
+webclient.on('connect', function(connection) {
+
+  console.log("Successfully connected to WebSocket");
+  setInterval(keepAlive, 300000);
+
+  connection.on('error', function(err) {
+      console.log("Connection Error: " + err;
+  });
+
+  connection.on('close', function() {
+      console.log("The server has shut down the connection. Sending shutdown signal to bot");
+      database.query("UPDATE keys SET shutdown = true").then(function(res) {
+        console.log("Bot has been given the shutdown signal. Shutting down web client...")
+        process.exit(0);
+      }).catch(function(err) {
+        console.log("An error occured signaling shutdown to bot. " + err);
+        console.log("Shutting down web client...");
+        process.exit(1);
+      })
+  });
+
+  connection.on('message', function(message) {
+      if(message.utf8Data.startsWith("TOKEN IS ")) {
+        console.log("The token has been receieved. Sending to bot.");
+        database.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9)).then(function() {
+          console.log("The token has been sent to the bot");
+        }).catch(function(err) {
+          console.log("An error occured when forwarding the token. " + err);
+        });
+      }
+  });
+
+});
+
+function keepAlive() {
+
+  console.log("Sending a Keep-Alive request")
+
+  globals.request('http://dashbotauth.herokuapp.com', function (err, response, body) {
+    if(err) {
+      console.log("An error occured when attempted to send a keep-alive request. " + err);
+    }
+    else {
+      console.log("Request send successfully.")
+    }
+  });
+
+}
+
+function respond404(request, response) {
 
   response.writeHead(404);
   response.end();
 
-}).listen(process.env.PORT);
-
-var webclient = new webClient();
-
-webclient.connect("wss://dashbotauth.herokuapp.com", "dbcp_key-" + process.env.socketkey);
-
-function keepAlive() {
-  requestlib('http://dashbotauth.herokuapp.com', function (error, response, body) {
-  });
 }
-
-webclient.on("error", function(error) {
-  console.log(error);
-})
-
-webclient.on('connectFailed', function(error) {
-    console.log('Connect Error: ' + error.toString());
-});
-
-webclient.on('connect', function(connection) {
-  console.log('WebSocket Client Connected');
-  setInterval(keepAlive, 300000);
-  connection.on('error', function(error) {
-      console.log("Connection Error: " + error.toString());
-  });
-  connection.on('close', function() {
-      console.log('DBCP Connection Closed');
-      client.query("UPDATE keys SET shutdown = true").then(function(res) {
-        process.exit(0);
-      })
-  });
-  connection.on('message', function(message) {
-      if(message.utf8Data.startsWith("TOKEN IS ")) {
-        client.query("UPDATE keys SET temptoken = " + message.utf8Data.substring(9));
-      }
-  });
-});
