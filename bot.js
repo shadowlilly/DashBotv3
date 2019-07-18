@@ -131,12 +131,14 @@ function setBotPresence(presenceName) {
               return;
             }
           }
-
+          /*
           bot.user.setPresence({ game: { selectedPresence.text }, status: presenceName.status).then(function() {
             console.log("Presence set to " + presenceName);
           }).catch(function(err) {
             console.log("An error occured while setting presence. " + err);
           });
+          */
+          console.log(selectedPresence);
 
         }
       });
