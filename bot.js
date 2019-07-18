@@ -138,7 +138,7 @@ function setBotPresence(presenceName) {
             console.log("An error occured while setting presence. " + err);
           });
           */
-          console.log(selectedPresence);
+          console.log(typeof selectedPresence);
 
         }
       });
