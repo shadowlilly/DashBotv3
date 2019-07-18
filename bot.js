@@ -60,7 +60,7 @@ function checkShutdown() {
     if(res.rows[0].shutdown) {
       console.log("A shutdown was requested. Acknowleding request.")
       database.query("UPDATE keys SET shutdown = false").then(function(res) {
-        donsole.log("Shutdown acknowledged. Shutting down...");
+        console.log("Shutdown acknowledged. Shutting down...");
         process.exit(0);
       }).catch(function(err) {
         console.log("An error occured while acknowleding shutdown. " + err);
