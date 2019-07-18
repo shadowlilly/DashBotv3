@@ -31,7 +31,7 @@ async function login() {
 
   console.log("Using token to login");
 
-  bot.login(firsttoken + secondtoken).then(function() {
+  globals.bot.login(firsttoken + secondtoken).then(function() {
     console.log("Login successful")
   }).catch(function(err){
     console.log("An error occured when logging in. " + err);
