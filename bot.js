@@ -130,16 +130,17 @@ function setBotPresence(presenceName) {
           console.log("An error occured while processing the presence file. " + err);
         }
         else {
-          var selectedPresence = data.presences[presenceName][0];
+          var selectedPresence = data.presences[presenceName];
           if(selectedPresence == null) {
             console.log("Presence " + presenceName + " could not be found. Switching to default");
-            selectedPresence = data.presences["default"][0];
+            selectedPresence = data.presences["default"];
             if(selectedPresence == null) {
               console.log("Default presence could not be found. Presence not set");
               return;
             }
           }
-          globals.bot.user.setPresence({game: {name: selectedPresence["text"][0] }, status: selectedPresence["status"][0]}).then(function() {
+          selectedPresence = selectedPresence[0];
+          globals.bot.user.setPresence({game: {name: selectedPresence["text"][0]}, status: selectedPresence["status"][0]}).then(function() {
             console.log("Presence set to " + presenceName);
           }).catch(function(err) {
             console.log("An error occured while setting presence. " + err);
