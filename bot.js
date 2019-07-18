@@ -8,6 +8,8 @@ const database = new pg({
 
 launchBot();
 
+globals.bot.on("ready", botReady)
+
 async function launchBot() {
 
   await database.connect().then(function() {
@@ -98,4 +100,47 @@ function sleep(ms){
     return new Promise(resolve=>{
         setTimeout(resolve,ms)
     })
+}
+
+function botReady() {
+
+  console.log("Bot is ready. Setting default presence");
+
+  setBotPresence(default);
+
+}
+
+function setBotPresence(presenceName) {
+
+  globals.fs.readFile(__dirname + "/presence.xml", function(err, result) {
+    if(err) {
+      console.log("An error occured while reading the presence file. " + err);
+    }
+    else {
+      var selectedPresence = result.presence[precenseName];
+      if(selectedPresence == null) {
+        console.log("Presence " + presenceName + " could not be found. Switching to default");
+      }
+      else {
+        bot.user.setPresence({ game: { selectedPresence.text }, status: presenceName.status).then(function() {
+          console.log("Presence set to " + presenceName);
+        }).catch(function(err) {
+          console.log("An error occured while setting presence. " + err);
+        });
+        return;
+      }
+      selectedPresence = result.presence.default;
+      if(selectedPresence == null) {
+        console.log("Default presence could not be found. Presence not set");
+      }
+      else {
+        bot.user.setPresence({ game: { selectedPresence.text }, status: presenceName.status).then(function() {
+          console.log("Presence set to " + presenceName);
+        }).catch(function(err) {
+          console.log("An error occured while setting presence. " + err);
+        });
+      }
+    }
+  })
+
 }
