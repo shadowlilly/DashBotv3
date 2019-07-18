@@ -117,32 +117,36 @@ function setBotPresence(presenceName) {
       console.log("An error occured while reading the presence file. " + err);
     }
     else {
-      console.log(result);
-      /*
-      var selectedPresence = result.presences[presenceName];
-      if(selectedPresence == null) {
-        console.log("Presence " + presenceName + " could not be found. Switching to default");
-      }
-      else {
-        bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
-          console.log("Presence set to " + presenceName);
-        }).catch(function(err) {
-          console.log("An error occured while setting presence. " + err);
-        });
-        return;
-      }
-      selectedPresence = result.presences["default"];
-      if(selectedPresence == null) {
-        console.log("Default presence could not be found. Presence not set");
-      }
-      else {
-        bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
-          console.log("Presence set to " + presenceName);
-        }).catch(function(err) {
-          console.log("An error occured while setting presence. " + err);
-        });
-      }
-      */
+      globals.parseXML(result, function(err, data) {
+        if(err) {
+          console.log("An error occured while processing the presence file. " + err);
+        }
+        else {
+          var selectedPresence = data.presences[presenceName];
+          if(selectedPresence == null) {
+            console.log("Presence " + presenceName + " could not be found. Switching to default");
+          }
+          else {
+            bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
+              console.log("Presence set to " + presenceName);
+            }).catch(function(err) {
+              console.log("An error occured while setting presence. " + err);
+            });
+            return;
+          }
+          selectedPresence = data.presences["default"];
+          if(selectedPresence == null) {
+            console.log("Default presence could not be found. Presence not set");
+          }
+          else {
+            bot.user.setPresence({ game: { selectedPresence["text"] }, status: presenceName["status"]).then(function() {
+              console.log("Presence set to " + presenceName);
+            }).catch(function(err) {
+              console.log("An error occured while setting presence. " + err);
+            });
+          }
+        }
+      })
     }
   })
 
