@@ -3,4 +3,4 @@ function parseMessage(message) {
   return 0;
 }
 
-modules.exports = parseMessage;
+module.exports = parseMessage;
